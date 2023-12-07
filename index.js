@@ -1,7 +1,28 @@
-import app from "./server.js"
-import mongodb from "mongodb"
-import ReviewsDAO from "./dao/reviewsDAO.js"
+//import app from "./server.js"
+//import mongodb from "mongodb"
+//import ReviewsDAO from "./dao/reviewsDAO.js"
 
+import { createConnection } from 'mysql';
+const connection = createConnection({
+  host: 'localhost',
+  user: 'pramodv',
+  password: 'gvKvKm',
+  database: 'unp'
+});
+connection.connect((err) => {
+  if (err) throw err;
+  console.log('Connected!');
+});
+
+connection.query('SELECT * FROM unp', (err, rows) => {
+  if (err) throw err;
+
+  console.log('Data received from Db:');
+  rows.forEach((row) => {
+    console.log(`${row.username}`);
+  });
+});
+/*
 const MongoClient = mongodb.MongoClient
 const mongo_username = process.env['MONGO_USERNAME']
 const mongo_password = process.env['MONGO_PASSWORD']
@@ -26,3 +47,4 @@ MongoClient.connect(
       console.log(`listening on port ${port}`)
     })
   })
+  */
